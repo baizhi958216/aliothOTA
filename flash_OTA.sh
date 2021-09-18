@@ -13,7 +13,7 @@ fi
 # 检查设备
 CheckDevice(){
 fastboot $* getvar product 2>&1 | grep "^product: *alioth"
-if [ $? -ne 0  ] ; then echo "Missmatching image and device"; exit 1; fi
+if [ $? -ne 0  ] ; then echo -e "\n\n\n\n\n\n\n\n\t\t请插入正确的设备\n\n\n\n\n\n\n\n"; exit 1; fi
 }
 # 准备刷机包
 PrePare(){
@@ -28,6 +28,8 @@ python scripts/update-payload-extractor/extract.py payload.bin --output_dir ./ou
 # 刷机
 Flash(){
 cd ./out
+echo -e "\n\n\n\n\n\n\n\n\t\t5秒后开始刷入，请勿挪动数据线或设备\n\n\n\n\n\n\n\n"
+sleep 5
 fastboot flash abl_ab abl.img
 fastboot flash aop_ab aop.img
 fastboot flash bluetooth_ab bluetooth.img
@@ -50,6 +52,7 @@ fastboot flash vbmeta_system_ab vbmeta_system.img
 fastboot flash vendor_boot_ab vendor_boot.img
 fastboot flash xbl_config_ab xbl_config.img
 fastboot flash xbl_ab xbl.img
+echo -e "\n\n\n\n\n\n\n\n\t\t重启进入fastbootd\n\n\n\n\n\n\n\n"
 fastboot reboot fastboot
 fastboot flash vendor vendor.img
 fastboot flash system_ext system_ext.img
