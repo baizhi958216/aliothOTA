@@ -6,16 +6,13 @@ uname -o
 Packages(){
 wahaha=`MySystem`
 Linux="GNU/Linux"
-myLinux=''
 if [[ "$wahaha" != "$Linux" ]] ; then
 echo -e "\n\n\n\n\n\n\n\t\t您需要一个Linux系统\n\n\n\n\n\n\n\n\n"
 exit
 fi
 if grep -Eqii "Arch Linux" /etc/issue || grep -Eq "Arch Linux" /etc/*-release; then
-myLinux=1
 sudo pacman -S wget python python-protobuf android-tools
 else
-myLinux=0
 sudo apt-get install wget python python-protobuf android-tools-fastboot
 fi
 }
