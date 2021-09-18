@@ -18,12 +18,12 @@ if [ $? -ne 0  ] ; then echo -e "\n\n\n\n\n\n\n\n\t\t请插入正确的设备\n\
 # 准备刷机包
 PrePare(){
 git clone https://gitee.com/baizhi958216/lineage-os_scripts.git --depth=1
-if [ ! -d ./scripts ];then
-  git clone https://github.com/LineageOS/scripts.git --depth=1
+if [ ! -d lineage-os_scripts ];then
+  git clone https://github.com/LineageOS/scripts.git lineage-os_scripts --depth=1
 fi
 wget -O alioth.zip https://hugeota.d.miui.com/21.9.17/miui_ALIOTH_21.9.17_25b8385d90_11.0.zip
 unzip alioth.zip payload.bin
-python scripts/update-payload-extractor/extract.py payload.bin --output_dir ./out
+python lineage-os_scripts/update-payload-extractor/extract.py payload.bin --output_dir ./out
 }
 # 刷机
 Flash(){
